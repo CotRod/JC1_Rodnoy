@@ -6,18 +6,18 @@ import java.util.List;
 
 public class FrequencyDictionary {
 
-    List<String> words;
+    private List<String> words;
 
     public FrequencyDictionary(String s) {
 
         s = s.trim();
         s = s.toLowerCase();
-        s = s.replaceAll("[\\d\\.\\^\\$\\*\\+\\?\\{\\[\\]\\\\\\|\\(\\)\\,\\/\\!\\-\\:\\;\"\\']", "");
-        String w[] = s.split("\\s");
+        s = s.replaceAll("[\\d.^$*+?{\\[\\]\\\\|(),/!\\-:;\"']><", "");
+        String[] w = s.split("\\s");
         words = new ArrayList<>();
-        for (int i = 0; i < w.length; i++) {
-            if (w[i].length() != 0) {
-                words.add(w[i]);
+        for (String value : w) {
+            if (value.length() != 0) {
+                words.add(value);
             }
         }
     }
