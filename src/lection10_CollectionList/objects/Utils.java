@@ -20,15 +20,9 @@ public class Utils {
     }
 
     public static Set toCombine(Set<Integer> first, Set<Integer> second) {
-        Iterator<Integer> iter = first.iterator();
         Set<Integer> newSet = new TreeSet<>();
-        while (iter.hasNext()) {
-            newSet.add(iter.next());
-        }
-        iter = second.iterator();
-        while (iter.hasNext()) {
-            newSet.add(iter.next());
-        }
+        newSet.addAll(first);
+        newSet.addAll(second);
         System.out.println(newSet);
         return newSet;
     }
