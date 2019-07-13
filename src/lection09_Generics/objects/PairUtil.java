@@ -1,8 +1,8 @@
 package lection09_Generics.objects;
 
 public final class PairUtil {
-    public static <T extends Pair> Pair swap(T obj) {
-
-        return new Pair<>(obj.getObj2(), obj.getObj1());
+    public static <T,V> Pair <V,T>swap(Pair <T,V> ob){
+        Pair<V,T> copyPair = new Pair<>(ob.getObj2(),ob.getObj1());
+        return copyPair;
     }
 }
