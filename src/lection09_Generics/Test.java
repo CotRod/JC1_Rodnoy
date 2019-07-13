@@ -13,7 +13,7 @@ public class Test {
         Pair pair2 = swap(pair1);
         System.out.println(pair2);
 
-        TwoNum <Integer,Integer> twoNum= new TwoNum<>(15,10);
+        TwoNum <?,?> twoNum= new TwoNum<>(15.0,10.0);
         System.out.println(twoNum.toSumUp());
         System.out.println(twoNum.toSubtract());
         System.out.println(twoNum.toMultiply());
