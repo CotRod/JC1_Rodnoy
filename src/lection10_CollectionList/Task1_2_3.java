@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Task1_2_3 {
 
-    private static final int AMOUNT_OF_PUPILS = 10;
+    private static final int AMOUNT_OF_STUDENTS = 10;
     private static final int NEGATIVE_MARK = 4;
     private static Random rand = new Random();
 
@@ -12,7 +12,7 @@ public class Task1_2_3 {
         int maxMark = 0;
         List<Integer> marks = new ArrayList<>();
         ListIterator<Integer> iter = marks.listIterator();
-        for (int i = 0; i < AMOUNT_OF_PUPILS; i++) {
+        for (int i = 0; i < AMOUNT_OF_STUDENTS; i++) {
             iter.add(getRandom());
         }
         System.out.println(marks);
@@ -29,6 +29,11 @@ public class Task1_2_3 {
         System.out.println(marks);
         System.out.println("Max mark: " + maxMark);
         marks.sort(Collections.reverseOrder());
+        System.out.println(marks);
+        Collections.shuffle(marks);
+        System.out.println(marks);
+        Collections.sort(marks);
+        Collections.reverse(marks);
         System.out.println(marks);
     }
 
