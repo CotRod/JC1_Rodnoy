@@ -28,13 +28,17 @@ public class Task1_2_3 {
         }
         System.out.println(marks);
         System.out.println("Max mark: " + maxMark);
-        marks.sort(Collections.reverseOrder());
+        for (int i = 0; i < marks.size()/2; i++) {
+            Collections.swap(marks,i,marks.size()-1-i);
+        }
         System.out.println(marks);
-        Collections.shuffle(marks);
-        System.out.println(marks);
-        Collections.sort(marks);
-        Collections.reverse(marks);
-        System.out.println(marks);
+//        marks.sort(Collections.reverseOrder());
+//        System.out.println(marks);
+//        Collections.shuffle(marks);
+//        System.out.println(marks);
+//        Collections.sort(marks);
+//        Collections.reverse(marks);
+//        System.out.println(marks);
     }
 
     private static Integer getRandom() {
