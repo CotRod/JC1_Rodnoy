@@ -6,46 +6,81 @@ import java.util.HashMap;
 public class Task3 {
 
     public static void main(String[] args) {
-        HashMap<Integer, Integer> d = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> firstPolynomial = new HashMap<>();
         Scanner f = new Scanner(System.in);
         System.out.print("Степень многочлена n= ");
         int n = f.nextInt();
-        System.out.print("D(x)= c0 ");
-        for (int i = 1; i <= n; i++) {
-            System.out.print(" + c" + i + "*x^" + i);
+
+// Первый многочлен
+
+        for (int i = n; i >= 0; i--) {
+            if (i > 1) {
+                System.out.print("a" + i + "*x^" + i + " + ");
+                continue;
+            } else if (i == 1) {
+                System.out.print("a" + i + "x + ");
+                continue;
+            }
+            System.out.print("a" + i);
         }
+
+// Заполняем значения множителей
+
         System.out.println();
-        for (int i = 0; i <= n; i++) {
-            System.out.print("c" + i + "=");
-            d.put(i, f.nextInt());
-        }
-        System.out.print("D(x)= " + d.get(0));
-        for (int i = 1; i <= n; i++) {
-            System.out.print(" + " + d.get(i) + "x^" + i);
-        }
-        System.out.println();
-        HashMap<Integer, Integer> e = new HashMap<Integer, Integer>();
-        System.out.print("E(x)= a0 ");
-        for (int i = 1; i <= n; i++) {
-            System.out.print(" + a" + i + "*x^" + i);
-        }
-        System.out.println();
-        for (int i = 0; i <= n; i++) {
+        for (int i = n; i >= 0; i--) {
             System.out.print("a" + i + "=");
-            e.put(i, f.nextInt());
+            firstPolynomial.put(i, f.nextInt());
         }
-        System.out.print("E(x)= " + e.get(0));
-        for (int i = 1; i <= n; i++) {
-            System.out.print(" + " + e.get(i) + "x^" + i);
+// Выводим первый многочлен
+        showPolynomial(n, firstPolynomial);
+
+// Второй многочлен
+
+        HashMap<Integer, Integer> secondPolynomial = new HashMap<>();
+        for (int i = n; i >= 0; i--) {
+            if (i > 1) {
+                System.out.print("b" + i + "*x^" + i + " + ");
+                continue;
+            } else if (i == 1) {
+                System.out.print("b" + i + "x + ");
+                continue;
+            }
+            System.out.print("b" + i);
+        }
+
+// Заполняем значения множителей
+
+        System.out.println();
+        for (int i = n; i >= 0; i--) {
+            System.out.print("b" + i + "=");
+            secondPolynomial.put(i, f.nextInt());
+        }
+
+// Выводим второй многочлен
+        showPolynomial(n, secondPolynomial);
+
+// Складываем
+        HashMap<Integer, Integer> resultPolynomial = new HashMap<>();
+        for (int i = n; i >= 0; i--) {
+            resultPolynomial.put(i, firstPolynomial.get(i) + secondPolynomial.get(i));
+        }
+
+// Выводим результат
+        showPolynomial(n, resultPolynomial);
+    }
+
+    private static void showPolynomial(int n, HashMap<Integer, Integer> polynomial) {
+        for (int i = n; i >= 0; i--) {
+            if (i > 1) {
+                System.out.print(polynomial.get(i) + "x^" + i + " + ");
+                continue;
+            } else if (i == 1) {
+                System.out.print(polynomial.get(i) + "x + ");
+                continue;
+            }
+            System.out.println(polynomial.get(i));
         }
         System.out.println();
-        HashMap<Integer, Integer> h = new HashMap<Integer, Integer>();
-        h.put(0, d.get(0) + e.get(0));
-        System.out.print("D(x)+E(x)= " + h.get(0));
-        for (int i = 1; i <= n; i++) {
-            h.put(i, d.get(i) + e.get(i));
-            System.out.print(" + " + h.get(i) + "x^" + i);
-        }
     }
 }
 
