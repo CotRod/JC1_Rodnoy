@@ -15,6 +15,6 @@ public class Task4 {
         for (char i : numbers) {
             stack.push(Character.getNumericValue(i));
         }
-        stack.reversNum();
+        System.out.println(stack.reversNum());
     }
 }

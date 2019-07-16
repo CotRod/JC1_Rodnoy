@@ -1,22 +1,23 @@
 package lection10_CollectionList.objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.ListIterator;
 
+import static java.lang.Integer.parseInt;
+
 public class Stack {
-    private int s;
-    private List<Integer> numbers;
+    private int size;
+    private LinkedList<Integer> numbers;
     private ListIterator<Integer> iter;
 
     public Stack(int i) {
-        s = i;
-        numbers = new ArrayList<>(i);
+        size = i;
+        numbers = new LinkedList<>();
         iter = numbers.listIterator();
     }
 
     public void push(int i) {
-        if (iter.nextIndex() < s) {
+        if (iter.nextIndex() < size) {
             iter.add(i);
         } else {
             System.out.println("Stack is full!!!");
@@ -24,34 +25,19 @@ public class Stack {
     }
 
     public Integer pull() {
-        if (iter.hasPrevious()) {
-            int i = iter.previousIndex();
-            iter.previous();
-            return numbers.remove(i);
-        } else {
-            System.out.println("Stack is empty");
-            return 0;
-        }
+        return numbers.pollLast();
     }
 
     public void setSize(int i) {
-        s = i;
-        List<Integer> numbers2 = new ArrayList<>(i);
-        numbers2.addAll(numbers);
-        numbers = numbers2;
+        size = i;
     }
 
-    public void reversNum() {
-        int a, b;
-        while (iter.hasPrevious()) {
-            b = iter.previous();
-            if (iter.hasPrevious()) {
-                a = iter.previous();
-                if (b > a) return;
-            }
+    public int reversNum() {
+        String revNum = "";
+        int s = numbers.size();
+        for (int i = 0; i < s; i++) {
+            revNum+=numbers.pollLast();
         }
-        while (iter.hasNext()) {
-            System.out.print(iter.next());
-        }
+        return parseInt(revNum);
     }
 }
