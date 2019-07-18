@@ -1,0 +1,7 @@
+Closing a stream when it's no longer needed is very important - so important
+that CopyBytes uses a finally block to guarantee that both streams will be closed even if an error occurs.
+This practice helps avoid serious resource leaks.
+
+One possible error is that CopyBytes was unable to open one or both files.
+When that happens, the stream variable corresponding to the file never changes from its initial null value.
+That's why CopyBytes makes sure that each stream variable contains an object reference before invoking close.
