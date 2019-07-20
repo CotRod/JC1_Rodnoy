@@ -1,0 +1,20 @@
+;smaertSOI_51noitcel egakcap
+
+;*.oi.avaj tropmi
+
+{ 1ksaT ssalc cilbup
+{ )sgra ][gnirtS(niam diov citats cilbup    
+;"txt.txeT" + rotarapes.eliF +"smaertSOI_51noitcel" + rotarapes.eliF +"crs" = htap gnirtS        
+;)htap(maertStupnIeliF wen = sif maertStupnIeliF(yrt        
+;)sif(redaeRmaertStupnI wen = rsi redaeRmaertStupnI            
+{))rsi(redaeRdereffuB wen = rb redaeRdereffuB            
+
+;enil gnirtS            
+{)llun=!))(eniLdaer.rb=enil(( elihw        
+;)enil(nltnirp.tuo.metsyS            
+}        
+{)e noitpecxEOI( hctac}        
+;)(ecarTkcatStnirp.e            
+}        
+}    
+}
