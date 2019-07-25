@@ -1,11 +1,7 @@
 package lecion17_StreamApi;
 
-import lecion17_StreamApi.interfaces.FinderKV;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Task3 {
     public static void main(String[] args) {
@@ -16,17 +12,10 @@ public class Task3 {
         test.put("twenty one", 21);
         test.put("fourteen", 14);
 
-        FinderKV finKV = (map) -> {
-            int sum = 0;
-            Set<String> keys = new HashSet<>(map.keySet());
-            for (String s : keys) {
-                if (s.length() < 7) {
-                    sum += map.get(s);
-                }
-            }
-            return sum;
-        };
-
-        System.out.println(finKV.sumVal(test));
+        System.out.println(test.entrySet().stream()
+                .filter(element -> element.getKey().length() < 7)
+                .map(Map.Entry::getValue)
+                .reduce(Integer::sum)
+                .get());
     }
 }

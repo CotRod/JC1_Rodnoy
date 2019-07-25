@@ -1,7 +1,5 @@
 package lecion17_StreamApi;
 
-import lecion17_StreamApi.interfaces.CountAvg;
-
 
 import java.util.Arrays;
 import java.util.Random;
@@ -20,24 +18,13 @@ public class Task1 {
             numbers[i] = rnd.nextInt(RANGE);
         }
         System.out.println(Arrays.toString(numbers));
-        CountAvg avgNum = (n) -> {
-            int sum = 0;
-            int count = 0;
-            for (int value : n) {
-                if (value % 2 != 0 && value % 5 == 0) {
-                    sum += value;
-                    count++;
-                    System.out.print(value + " ");
-                }
-            }
-            if (count == 0) {
-                return 0;
-            } else {
-                return sum / count;
-            }
-        };
-        double avg = avgNum.cntAvg(numbers);
+
+        double avg = Arrays.stream(numbers)
+                .filter(element -> element % 2 != 0 && element % 5 == 0)
+                .peek(element -> System.out.print(element + " "))
+                .average().orElse(0);
+
         System.out.println();
-        System.out.println(avg);
+        System.out.printf("%.1f", avg);
     }
 }

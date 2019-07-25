@@ -1,9 +1,7 @@
 package lecion17_StreamApi;
 
-import lecion17_StreamApi.interfaces.NumsToString;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Task4 {
@@ -15,14 +13,10 @@ public class Task4 {
         nums.add(2);
         nums.add(1);
 
-        NumsToString nStr = (list) -> {
-            Iterator<Integer> itr = list.iterator();
-            StringBuilder str = new StringBuilder();
-            while (itr.hasNext()) {
-                str.append(itr.next());
-            }
-            return str.toString();
-        };
-        System.out.println(nStr.numStr(nums));
+        String numStr = nums.stream()
+                .map(Object::toString)
+                .reduce((str, elem) -> str + elem)
+                .get();
+        System.out.println(numStr);
     }
 }

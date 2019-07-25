@@ -1,6 +1,5 @@
 package lecion17_StreamApi;
 
-import lecion17_StreamApi.interfaces.StringFinder;
 
 import java.util.*;
 
@@ -14,17 +13,12 @@ public class Task2 {
         stringList.add("Найти уникальные");
         stringList.add("Не < 8");
 
-        StringFinder strFin = (list) -> {
-            Set <String> stringSet = new HashSet();
-            for (String s : list) {
-                if (s.length() > 8) {
-                    stringSet.add(s);
-                }
-            }
-            System.out.println(stringSet);
-            return stringSet.size();
-        };
+        long count = stringList.stream()
+                .filter(s -> s.length() > 8)
+                .distinct()
+                .peek(System.out::println)
+                .count();
 
-        System.out.println("Amount of unique strings is " + strFin.countUnique(stringList));
+        System.out.print("Amount of unique strings is " + count);
     }
 }

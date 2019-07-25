@@ -11,6 +11,12 @@ public class Person {
         this.age = age;
     }
 
+    public Person() {
+        this.firstName = "No first name";
+        this.lastName = "No last name";
+        this.age = 0;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -21,5 +27,10 @@ public class Person {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }
