@@ -1,29 +1,25 @@
 package lection15_IOStreams;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Task3 {
     public static void main(String[] args) {
         String path = "src" + File.separator + "lection15_IOStreams" + File.separator + "Text.txt";
+        Pattern p = Pattern.compile("\\b\\w*(\\w)\\b\\s?\\n?\\b\\1\\w*\\b");
         try (FileInputStream fis = new FileInputStream(path);
              InputStreamReader isr = new InputStreamReader(fis);
              BufferedReader br = new BufferedReader(isr)) {
-            String line;
-            String lastWord = null;
-            while ((line = br.readLine()) != null) {
-                line = line.toLowerCase();
-                line = line.replaceAll("\\.,-", "");
-                String[] words = line.split(" ");
-                for (int i = 0; i < words.length; i++) {
-                    if(words[i].length()==0)continue;
-                    if(lastWord == null){
-
-                    }else if (lastWord.charAt(lastWord.length() - 1) == words[i].charAt(0)) {
-                        System.out.print(lastWord + " " + words[i]);
-                        System.out.println();
-                    }
-                    lastWord = words[i];
-                }
+            String text;
+            StringBuilder buffer = new StringBuilder();
+            while ((text = br.readLine()) != null) {
+                buffer.append(text).append(" ");
+            }
+            text = buffer.toString();
+            Matcher matcher = p.matcher(text);
+            while (matcher.find()) {
+                System.out.println(matcher.group());
             }
         } catch (IOException e) {
             e.printStackTrace();
