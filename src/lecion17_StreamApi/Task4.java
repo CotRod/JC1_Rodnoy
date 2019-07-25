@@ -3,6 +3,7 @@ package lecion17_StreamApi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Task4 {
     public static void main(String[] args) {
@@ -15,8 +16,7 @@ public class Task4 {
 
         String numStr = nums.stream()
                 .map(Object::toString)
-                .reduce((str, elem) -> str + elem)
-                .get();
+                .collect(Collectors.joining());
         System.out.println(numStr);
     }
 }
