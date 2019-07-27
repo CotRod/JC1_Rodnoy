@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Task5 {
@@ -29,6 +30,7 @@ public class Task5 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ArrayList<Integer> numbers = new ArrayList<>();
 // Читаем байты
         try (FileInputStream numStreamIn = new FileInputStream(path)) {
             int counter = 0;
@@ -39,9 +41,16 @@ public class Task5 {
                 int fob = numStreamIn.read();
                 int j = fb + sb + tb + fob;
                 System.out.println(nums[counter++] + " -> " + j);
+                numbers.add(j);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        double avg = numbers.stream()
+                .peek(element -> System.out.print(element+" "))
+                .mapToLong(Integer::longValue)
+                .average().orElse(0);
+        System.out.println();
+        System.out.println(avg);
     }
 }
