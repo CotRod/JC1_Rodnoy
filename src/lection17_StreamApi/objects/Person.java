@@ -1,4 +1,4 @@
-package lecion17_StreamApi.objects;
+package lection17_StreamApi.objects;
 
 public class Person {
     private String firstName;

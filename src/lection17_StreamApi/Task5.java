@@ -1,6 +1,6 @@
-package lecion17_StreamApi;
+package lection17_StreamApi;
 
-import lecion17_StreamApi.objects.Person;
+import lection17_StreamApi.objects.Person;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package lecion17_StreamApi;
+package lection17_StreamApi;
 
 
 import java.util.*;
