@@ -1,7 +1,6 @@
 package lection18_Thread.objects;
 
 import java.util.HashMap;
-import java.util.Random;
 
 import static lection18_Thread.objects.Details.*;
 
@@ -18,8 +17,7 @@ public class MadScientist {
         put(HDD, 0);
     }};
 
-    public static void get(Details det) {
-        Random rnd = new Random();
+    static void get(Details det) {
         scDet.put(det, (scDet.get(det) + 1));
     }
 

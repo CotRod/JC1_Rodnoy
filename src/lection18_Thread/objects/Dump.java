@@ -24,11 +24,11 @@ public class Dump {
         }
     }
 
-    public static void put(Details d) {
+    static void put(Details d) {
         dump.put(d, (dump.get(d) + 1));
     }
 
-    public static Details get(Details d) {
+    static Details get(Details d) {
         dump.put(d, (dump.get(d) - 1));
         return d;
     }
