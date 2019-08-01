@@ -27,23 +27,19 @@ public class Dump {
     }
 
     public void put() {
-        Random rnd = new Random();
-        Details d;
-        for (int j = 0; j < (rnd.nextInt(3) + 1); j++) {
-            d = rand();
-            dump.put(d, (dump.get(d) + 1));
-        }
+        Details d = rand();
+        dump.put(d, (dump.get(d) + 1));
     }
 
     public Details get() {
         Details d;
         d = rand();
-        if (dump.get(d)>0) {
+        if (dump.get(d) > 0) {
             dump.put(d, (dump.get(d) - 1));
             return d;
-        }else{
-            for (Map.Entry<Details,Integer> entry:dump.entrySet()) {
-                if (entry.getValue()>0)return entry.getKey();
+        } else {
+            for (Map.Entry<Details, Integer> entry : dump.entrySet()) {
+                if (entry.getValue() > 0) return entry.getKey();
             }
         }
         return null;
