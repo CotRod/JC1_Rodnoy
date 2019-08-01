@@ -27,7 +27,7 @@ public class Dump {
         }
     }
 
-    void put() {
+    synchronized void put() {
         Details d = rand();
         dump.put(d, (dump.get(d) + 1));
     }
