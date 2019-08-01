@@ -1,6 +1,8 @@
 package lection18_Thread.objects;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static lection18_Thread.objects.Details.*;
 
@@ -17,30 +19,26 @@ public class MadScientist {
         put(HDD, 0);
     }};
 
-    public void putDetail(Details det) {
+    void putDetail(Details det) {
         scDet.put(det, (scDet.get(det) + 1));
     }
 
-    public boolean checkRobot() {
-        if (scDet.get(HEAD) > 0 && scDet.get(BODY) > 0 && scDet.get(LEFT_HAND) > 0 && scDet.get(RIGHT_HAND) > 0 && scDet.get(LEFT_LEG) > 0 && scDet.get(RIGHT_LEG) > 0 && scDet.get(CPU) > 0 && scDet.get(RAM) > 0 && scDet.get(HDD) > 0) {
-            scDet.put(HEAD, (scDet.get(HEAD) - 1));
-            scDet.put(BODY, (scDet.get(BODY) - 1));
-            scDet.put(LEFT_HAND, (scDet.get(LEFT_HAND) - 1));
-            scDet.put(RIGHT_HAND, (scDet.get(RIGHT_HAND) - 1));
-            scDet.put(LEFT_LEG, (scDet.get(LEFT_LEG) - 1));
-            scDet.put(RIGHT_LEG, (scDet.get(RIGHT_LEG) - 1));
-            scDet.put(CPU, (scDet.get(CPU) - 1));
-            scDet.put(RAM, (scDet.get(RAM) - 1));
-            scDet.put(HDD, (scDet.get(HDD) - 1));
-            return true;
-        } else return false;
+    public int amountOfRobots() {
+        if (hasEnoughDetailsForRobot()) {
+            int robots = 999;
+            for (Map.Entry<Details, Integer> entry : scDet.entrySet()) {
+                if (entry.getValue() < robots) {
+                    robots = entry.getValue();
+                }
+            }
+            for (Map.Entry<Details, Integer> entry : scDet.entrySet()) {
+                entry.setValue(entry.getValue() - robots);
+            }
+            return robots;
+        } else return 0;
     }
 
-    public int amountOfRobots(){
-        int robots=0;
-        while(checkRobot()){
-            robots++;
-        }
-        return robots;
+    private boolean hasEnoughDetailsForRobot() {
+        return scDet.get(HEAD) > 0 && scDet.get(BODY) > 0 && scDet.get(LEFT_HAND) > 0 && scDet.get(RIGHT_HAND) > 0 && scDet.get(LEFT_LEG) > 0 && scDet.get(RIGHT_LEG) > 0 && scDet.get(CPU) > 0 && scDet.get(RAM) > 0 && scDet.get(HDD) > 0;
     }
 }

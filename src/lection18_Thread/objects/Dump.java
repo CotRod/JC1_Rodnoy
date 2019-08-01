@@ -1,5 +1,6 @@
 package lection18_Thread.objects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -26,22 +27,25 @@ public class Dump {
         }
     }
 
-    public void put() {
+    void put() {
         Details d = rand();
         dump.put(d, (dump.get(d) + 1));
     }
 
-    public Details get() {
+    synchronized Details get() {
         Details d;
         d = rand();
         if (dump.get(d) > 0) {
             dump.put(d, (dump.get(d) - 1));
             return d;
         } else {
+            ArrayList<Details> details = new ArrayList<>();
             for (Map.Entry<Details, Integer> entry : dump.entrySet()) {
-                if (entry.getValue() > 0) return entry.getKey();
+                if (entry.getValue() > 0) details.add(entry.getKey());
             }
+            if (details.size() == 0) return null;
+            Random rnd = new Random();
+            return details.get(rnd.nextInt(details.size()));
         }
-        return null;
     }
 }
