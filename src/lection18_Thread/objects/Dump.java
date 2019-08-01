@@ -45,7 +45,9 @@ public class Dump {
             }
             if (details.size() == 0) return null;
             Random rnd = new Random();
-            return details.get(rnd.nextInt(details.size()));
+            d=details.get(rnd.nextInt(details.size()));
+            dump.put(d, (dump.get(d) - 1));
+            return d;
         }
     }
 }
