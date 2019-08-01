@@ -1,6 +1,8 @@
 package lection18_Thread.objects;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import static lection18_Thread.objects.Details.*;
 import static lection18_Thread.objects.Util.rand;
@@ -20,16 +22,30 @@ public class Dump {
 
     public Dump() {
         for (int i = 0; i < 20; i++) {
-            put(rand()); //Прибавляем +1 к количеству рандомной детали
+            put();
         }
     }
 
-    static void put(Details d) {
-        dump.put(d, (dump.get(d) + 1));
+    public void put() {
+        Random rnd = new Random();
+        Details d;
+        for (int j = 0; j < (rnd.nextInt(3) + 1); j++) {
+            d = rand();
+            dump.put(d, (dump.get(d) + 1));
+        }
     }
 
-    static Details get(Details d) {
-        dump.put(d, (dump.get(d) - 1));
-        return d;
+    public Details get() {
+        Details d;
+        d = rand();
+        if (dump.get(d)>0) {
+            dump.put(d, (dump.get(d) - 1));
+            return d;
+        }else{
+            for (Map.Entry<Details,Integer> entry:dump.entrySet()) {
+                if (entry.getValue()>0)return entry.getKey();
+            }
+        }
+        return null;
     }
 }

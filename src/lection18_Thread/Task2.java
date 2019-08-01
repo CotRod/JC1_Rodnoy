@@ -8,21 +8,16 @@ import lection18_Thread.objects.Servant;
 
 public class Task2 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Dump dump = new Dump();
-        Factory factory = new Factory();
-        Servant servant = new Servant();
+        MadScientist madScientist = new MadScientist();
+        Factory factory = new Factory(dump);
+        Servant servant = new Servant(dump, madScientist);
         factory.start();
         servant.start();
-        try {
-            servant.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        int amountOfRobots = 0;
-        while (MadScientist.checkRobot()) {
-            amountOfRobots++;
-        }
-        System.out.println("Amount of robots : " + amountOfRobots);
+        servant.join();
+        factory.join();
+
+        System.out.println("Amount of robots : " + madScientist.amountOfRobots());
     }
 }
