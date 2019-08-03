@@ -1,13 +1,12 @@
 package lection18_Thread.objects;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import static lection18_Thread.objects.Details.*;
 
 public class MadScientist {
-    private static HashMap<Details, Integer> scDet = new HashMap<Details, Integer>() {{
+    private HashMap<Details, Integer> scDet = new HashMap<Details, Integer>() {{
         put(HEAD, 0);
         put(BODY, 0);
         put(LEFT_HAND, 0);

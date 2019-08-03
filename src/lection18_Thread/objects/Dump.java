@@ -9,7 +9,7 @@ import static lection18_Thread.objects.Details.*;
 import static lection18_Thread.objects.Util.rand;
 
 public class Dump {
-    private static HashMap<Details, Integer> dump = new HashMap<Details, Integer>() {{
+    private HashMap<Details, Integer> dump = new HashMap<Details, Integer>() {{
         put(HEAD, 0);
         put(BODY, 0);
         put(LEFT_HAND, 0);
@@ -20,34 +20,64 @@ public class Dump {
         put(RAM, 0);
         put(HDD, 0);
     }};
+    private boolean isTimeToGet = false;
+    private Random rnd = new Random();
 
     public Dump() {
-        for (int i = 0; i < 20; i++) {
-            put();
-        }
+            put("First Night");
     }
 
     synchronized void put() {
-        Details d = rand();
-        dump.put(d, (dump.get(d) + 1));
+        while (!isTimeToGet) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        int randomNum = fromOneToFour();
+        for (int j = 0; j < randomNum; j++) {
+            Details d = rand();
+            dump.put(d, (dump.get(d) + 1));
+        }
+        isTimeToGet = false;
+        notifyAll();
     }
 
-    synchronized Details get() {
-        Details d;
-        d = rand();
-        if (dump.get(d) > 0) {
-            dump.put(d, (dump.get(d) - 1));
-            return d;
-        } else {
-            ArrayList<Details> details = new ArrayList<>();
-            for (Map.Entry<Details, Integer> entry : dump.entrySet()) {
-                if (entry.getValue() > 0) details.add(entry.getKey());
+    synchronized ArrayList<Details> get() {
+        while (isTimeToGet) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            if (details.size() == 0) return null;
-            Random rnd = new Random();
-            d=details.get(rnd.nextInt(details.size()));
+        }
+        ArrayList<Details> gettingDetails = new ArrayList<>();
+        Details d;
+        int randomNum = fromOneToFour();
+        for (int i = 0; i < randomNum; i++) {
+            ArrayList<Details> avaialbleDetails = new ArrayList<>();
+            for (Map.Entry<Details, Integer> entry : dump.entrySet()) {
+                if (entry.getValue() > 0) avaialbleDetails.add(entry.getKey());
+            }
+            if (avaialbleDetails.size() == 0) break;
+            d = avaialbleDetails.get(rnd.nextInt(avaialbleDetails.size()));
             dump.put(d, (dump.get(d) - 1));
-            return d;
+            gettingDetails.add(d);
+        }
+        isTimeToGet = true;
+        notifyAll();
+        return gettingDetails;
+    }
+
+    private int fromOneToFour() {
+        return rnd.nextInt(4) + 1;
+    }
+
+    private void put(String s){
+        for (int i = 0; i < 20; i++) {
+            Details d = rand();
+            dump.put(d, (dump.get(d) + 1));
         }
     }
 }
