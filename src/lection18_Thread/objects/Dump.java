@@ -20,38 +20,38 @@ public class Dump {
         put(RAM, 0);
         put(HDD, 0);
     }};
-    private boolean isTimeToGet = false;
+    //    private boolean isTimeToGet = false;
     private Random rnd = new Random();
 
     public Dump() {
-            put("First Night");
+        put("First Night");
     }
 
     synchronized void put() {
-        while (!isTimeToGet) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        while (!isTimeToGet) {
+//            try {
+//                wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
         int randomNum = fromOneToFour();
         for (int j = 0; j < randomNum; j++) {
             Details d = rand();
             dump.put(d, (dump.get(d) + 1));
         }
-        isTimeToGet = false;
-        notifyAll();
+//        isTimeToGet = false;
+//        notifyAll();
     }
 
     synchronized ArrayList<Details> get() {
-        while (isTimeToGet) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        while (isTimeToGet) {
+//            try {
+//                wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
         ArrayList<Details> gettingDetails = new ArrayList<>();
         Details d;
         int randomNum = fromOneToFour();
@@ -65,8 +65,8 @@ public class Dump {
             dump.put(d, (dump.get(d) - 1));
             gettingDetails.add(d);
         }
-        isTimeToGet = true;
-        notifyAll();
+//        isTimeToGet = true;
+//        notifyAll();
         return gettingDetails;
     }
 
@@ -74,7 +74,7 @@ public class Dump {
         return rnd.nextInt(4) + 1;
     }
 
-    private void put(String s){
+    private void put(String s) {
         for (int i = 0; i < 20; i++) {
             Details d = rand();
             dump.put(d, (dump.get(d) + 1));
