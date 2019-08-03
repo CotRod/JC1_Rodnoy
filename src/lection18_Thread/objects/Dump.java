@@ -20,7 +20,6 @@ public class Dump {
         put(RAM, 0);
         put(HDD, 0);
     }};
-    //    private boolean isTimeToGet = false;
     private Random rnd = new Random();
 
     public Dump() {
@@ -28,30 +27,15 @@ public class Dump {
     }
 
     synchronized void put() {
-//        while (!isTimeToGet) {
-//            try {
-//                wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
         int randomNum = fromOneToFour();
         for (int j = 0; j < randomNum; j++) {
             Details d = rand();
             dump.put(d, (dump.get(d) + 1));
         }
-//        isTimeToGet = false;
-//        notifyAll();
     }
 
     synchronized ArrayList<Details> get() {
-//        while (isTimeToGet) {
-//            try {
-//                wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
         ArrayList<Details> gettingDetails = new ArrayList<>();
         Details d;
         int randomNum = fromOneToFour();
@@ -65,8 +49,6 @@ public class Dump {
             dump.put(d, (dump.get(d) - 1));
             gettingDetails.add(d);
         }
-//        isTimeToGet = true;
-//        notifyAll();
         return gettingDetails;
     }
 
